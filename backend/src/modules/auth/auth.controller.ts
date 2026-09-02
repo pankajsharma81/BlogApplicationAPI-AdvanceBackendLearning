@@ -1,14 +1,15 @@
 import { Request, Response } from "express";
 import { catchAsync } from "../../utils/catch-async.js";
-import { success } from "zod";
+import { authService } from "./auth.service.js";
 
 export const registerUserController = catchAsync(
   async (req: Request, res: Response) => {
-    const { username, email, password } = req.body;
+    const result = await authService.registerUser(req.body);
 
     res.status(201).json({
       success: true,
-      message: "User Created",
+      message: "User Created Successfully",
+      data: result,
     });
   },
 );
