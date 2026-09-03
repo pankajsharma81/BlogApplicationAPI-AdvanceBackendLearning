@@ -1,15 +1,24 @@
 import { Request, Response } from "express";
 import { catchAsync } from "../../utils/catch-async.js";
 import { authService } from "./auth.service.js";
+import { sendResponse } from "../../utils/sendResponse.js";
+import { RegisterResponse } from "./auth.response.js";
 
 export const registerUserController = catchAsync(
   async (req: Request, res: Response) => {
     const result = await authService.registerUser(req.body);
 
-    res.status(201).json({
-      success: true,
+    // res.status(201).json({
+    //   success: true,
+    //   message: "User Created Successfully",
+    //   data: result,
+    // });
+
+    sendResponse<RegisterResponse>({
+      res,
+      statusCode: 201,
       message: "User Created Successfully",
-      data: result,
-    });
+      data: result
+    })
   },
 );
