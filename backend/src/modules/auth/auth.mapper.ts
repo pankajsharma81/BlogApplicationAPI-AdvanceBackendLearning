@@ -1,4 +1,4 @@
-import { UserResponse } from "./auth.response.js";
+import { RegisterResponse, UserResponse} from "./auth.response.js";
 
 export const mapUserResponse = (user: {
   id: string;

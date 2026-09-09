@@ -1,5 +1,4 @@
 import { Response } from "express";
-import { success } from "zod";
 
 interface sendResponseOptions<T> {
   res: Response;
