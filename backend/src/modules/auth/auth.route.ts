@@ -2,6 +2,8 @@ import express from "express";
 import {
   getCurrentUserController,
   loginUserController,
+  logoutAllController,
+  logoutController,
   refreshTokenController,
   registerUserController,
 } from "./auth.controller.js";
@@ -18,5 +20,9 @@ router.post("/login", validate(loginUserSchema), loginUserController);
 router.post("/refresh", validate(refreshTokenSchema), refreshTokenController )
 
 router.get("/me", authenticate, getCurrentUserController)
+
+router.post("/logout", authenticate, logoutController)
+
+router.post("/logout-all", authenticate, logoutAllController)
 
 export default router;

@@ -56,3 +56,32 @@ export const getCurrentUserController = catchAsync(
     })
   }
 )
+
+export const logoutController = catchAsync(
+  async (req: Request, res: Response) => {
+
+    const {refreshToken} = req.body;
+
+    const result = await authService.logout(refreshToken);
+
+    sendResponse({
+      res,
+      statusCode: 200,
+      message: "User logged out Successfully",
+      data: result
+    })
+  }
+)
+
+export const logoutAllController = catchAsync (
+  async (req: Request, res: Response) => {
+    const result = await authService.logoutAll(req?.userId as string);
+
+    sendResponse( {
+      res,
+      statusCode:200,
+      message: "All user logged out Successfully",
+      data: result
+    })
+  }
+)
