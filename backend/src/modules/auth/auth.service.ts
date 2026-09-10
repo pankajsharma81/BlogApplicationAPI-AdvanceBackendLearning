@@ -143,14 +143,41 @@ export const authService = {
   },
 
   getCurrentUser: async (userId: string) => {
+    const user = await authRepository.findUserById(userId);
 
-    const user = await authRepository.findUserById(userId)
-
-    if(!user){
-      throw new AppError("User not found", 404)
+    if (!user) {
+      throw new AppError("User not found", 404);
     }
 
-    return mapUserResponse(user)
+    return mapUserResponse(user);
+  },
 
-  }
+  logout: async (refreshToken: string) => {
+    if (!refreshToken) {
+      throw new AppError("Refresh token required", 401);
+    }
+
+    const refreshTokenHashed = hashToken(refreshToken);
+
+    const existingToken =
+      await authRepository.findRefreshToken(refreshTokenHashed);
+
+    if (!existingToken) {
+      throw new AppError("Invalid Refresh Token", 401);
+    }
+
+    await authRepository.deleteRefreshTokenById(existingToken.id);
+
+    return true;
+  },
+
+  logoutAll: async (userId: string) => {
+    if (!userId) {
+      throw new AppError("User not authenticated", 401);
+    }
+
+    await authRepository.deleteAllRefreshTokenByUser(userId);
+
+    return true;
+  },
 };
