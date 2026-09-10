@@ -3,6 +3,7 @@ import { catchAsync } from "../../utils/catch-async.js";
 import { authService } from "./auth.service.js";
 import { sendResponse } from "../../utils/sendResponse.js";
 import { LoginResponse, RegisterResponse } from "./auth.response.js";
+import { AppError } from "../../utils/app-error.js";
 
 export const registerUserController = catchAsync(
   async (req: Request, res: Response) => {
@@ -40,5 +41,18 @@ export const refreshTokenController = catchAsync(
       message: "Access token refreshed successfully",
       data: result
     });
+  }
+)
+
+export const getCurrentUserController = catchAsync(
+  async (req: Request, res: Response) => {
+    const result = await authService.getCurrentUser(req?.userId as string);
+
+    sendResponse({
+      res,
+      statusCode: 200,
+      message: "User details fetched Successfully",
+      data: result
+    })
   }
 )
