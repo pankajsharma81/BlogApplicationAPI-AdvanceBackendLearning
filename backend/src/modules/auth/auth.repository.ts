@@ -1,12 +1,18 @@
 import { prisma } from "../../lib/prisma.js";
 
 export const authRepository = {
-
   findUserById: async (id: string) => {
     const user = await prisma.user.findUnique({
-      where: {id}
-    })
-    return user
+      where: { id },
+      select: {
+        id: true,
+        username: true,
+        email: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+    });
+    return user;
   },
 
   findUserByUsername: async (username: string) => {
@@ -56,7 +62,13 @@ export const authRepository = {
     return refreshToken;
   },
 
-  deleteRefreshToken: async (id: string) => {
+  findRefreshTokenByUserId: async (userId: string) => {
+    return await prisma.refreshToken.findMany({
+      where: { userId },
+    });
+  },
+
+  deleteRefreshTokenById: async (id: string) => {
     const refreshToken = await prisma.refreshToken.delete({
       where: { id },
     });

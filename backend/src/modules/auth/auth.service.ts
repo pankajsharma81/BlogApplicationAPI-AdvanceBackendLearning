@@ -113,7 +113,7 @@ export const authService = {
     }
 
     if (storedToken.expiresAt < new Date()) {
-      await authRepository.deleteRefreshToken(storedToken.id);
+      await authRepository.deleteRefreshTokenById(storedToken.id);
 
       throw new AppError("Refresh token has expired", 401);
     }
@@ -123,7 +123,7 @@ export const authService = {
     }
 
     // Rotate refresh token
-    await authRepository.deleteRefreshToken(storedToken.id);
+    await authRepository.deleteRefreshTokenById(storedToken.id);
 
     const newAccessToken = generateAccessToken(payload.userId);
     const newRefreshToken = generateRefreshToken(payload.userId);
@@ -141,4 +141,16 @@ export const authService = {
       refreshToken: newRefreshToken,
     };
   },
+
+  getCurrentUser: async (userId: string) => {
+
+    const user = await authRepository.findUserById(userId)
+
+    if(!user){
+      throw new AppError("User not found", 404)
+    }
+
+    return mapUserResponse(user)
+
+  }
 };
