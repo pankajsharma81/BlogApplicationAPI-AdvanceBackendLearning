@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { AppError } from "../utils/app-error.js";
 import { verifyAccessToken } from "../utils/jwt.helper.js";
-import { authRepository } from "../modules/auth/auth.repository.js";
+import { authService } from "../modules/auth/auth.container.js";
 
 export const authenticate = async (
   req: Request,
@@ -19,7 +19,7 @@ export const authenticate = async (
 
     const decoded = verifyAccessToken(token);
 
-    const user = await authRepository.findUserById(decoded.userId);
+    const user = await authService.getCurrentUser(decoded.userId);
 
     if (!user) {
       throw new AppError("Unauthorized request", 401);
