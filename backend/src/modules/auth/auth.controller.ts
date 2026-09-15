@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import { catchAsync } from "../../utils/catch-async.js";
-import { authService } from "./auth.service.js";
 import { sendResponse } from "../../utils/sendResponse.js";
 import { LoginResponse, RegisterResponse } from "./auth.response.js";
 import { AppError } from "../../utils/app-error.js";
+import { authService } from "./auth.container.js";
 
 export const registerUserController = catchAsync(
   async (req: Request, res: Response) => {
