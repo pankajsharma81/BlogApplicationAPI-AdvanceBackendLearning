@@ -3469,6 +3469,7 @@ export namespace Prisma {
     title: string | null
     description: string | null
     imageUrl: string | null
+    imagePublicId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -3479,6 +3480,7 @@ export namespace Prisma {
     title: string | null
     description: string | null
     imageUrl: string | null
+    imagePublicId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -3489,6 +3491,7 @@ export namespace Prisma {
     title: number
     description: number
     imageUrl: number
+    imagePublicId: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -3501,6 +3504,7 @@ export namespace Prisma {
     title?: true
     description?: true
     imageUrl?: true
+    imagePublicId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -3511,6 +3515,7 @@ export namespace Prisma {
     title?: true
     description?: true
     imageUrl?: true
+    imagePublicId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -3521,6 +3526,7 @@ export namespace Prisma {
     title?: true
     description?: true
     imageUrl?: true
+    imagePublicId?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -3604,6 +3610,7 @@ export namespace Prisma {
     title: string
     description: string
     imageUrl: string | null
+    imagePublicId: string | null
     createdAt: Date
     updatedAt: Date
     _count: PostCountAggregateOutputType | null
@@ -3631,6 +3638,7 @@ export namespace Prisma {
     title?: boolean
     description?: boolean
     imageUrl?: boolean
+    imagePublicId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     comments?: boolean | Post$commentsArgs<ExtArgs>
@@ -3644,6 +3652,7 @@ export namespace Prisma {
     title?: boolean
     description?: boolean
     imageUrl?: boolean
+    imagePublicId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -3655,6 +3664,7 @@ export namespace Prisma {
     title?: boolean
     description?: boolean
     imageUrl?: boolean
+    imagePublicId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -3666,11 +3676,12 @@ export namespace Prisma {
     title?: boolean
     description?: boolean
     imageUrl?: boolean
+    imagePublicId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type PostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "title" | "description" | "imageUrl" | "createdAt" | "updatedAt", ExtArgs["result"]["post"]>
+  export type PostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "title" | "description" | "imageUrl" | "imagePublicId" | "createdAt" | "updatedAt", ExtArgs["result"]["post"]>
   export type PostInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     comments?: boolean | Post$commentsArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -3695,6 +3706,7 @@ export namespace Prisma {
       title: string
       description: string
       imageUrl: string | null
+      imagePublicId: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["post"]>
@@ -4127,6 +4139,7 @@ export namespace Prisma {
     readonly title: FieldRef<"Post", 'String'>
     readonly description: FieldRef<"Post", 'String'>
     readonly imageUrl: FieldRef<"Post", 'String'>
+    readonly imagePublicId: FieldRef<"Post", 'String'>
     readonly createdAt: FieldRef<"Post", 'DateTime'>
     readonly updatedAt: FieldRef<"Post", 'DateTime'>
   }
@@ -5699,6 +5712,7 @@ export namespace Prisma {
     title: 'title',
     description: 'description',
     imageUrl: 'imageUrl',
+    imagePublicId: 'imagePublicId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -5922,6 +5936,7 @@ export namespace Prisma {
     title?: StringFilter<"Post"> | string
     description?: StringFilter<"Post"> | string
     imageUrl?: StringNullableFilter<"Post"> | string | null
+    imagePublicId?: StringNullableFilter<"Post"> | string | null
     createdAt?: DateTimeFilter<"Post"> | Date | string
     updatedAt?: DateTimeFilter<"Post"> | Date | string
     comments?: CommentListRelationFilter
@@ -5934,6 +5949,7 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     imageUrl?: SortOrderInput | SortOrder
+    imagePublicId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     comments?: CommentOrderByRelationAggregateInput
@@ -5949,6 +5965,7 @@ export namespace Prisma {
     title?: StringFilter<"Post"> | string
     description?: StringFilter<"Post"> | string
     imageUrl?: StringNullableFilter<"Post"> | string | null
+    imagePublicId?: StringNullableFilter<"Post"> | string | null
     createdAt?: DateTimeFilter<"Post"> | Date | string
     updatedAt?: DateTimeFilter<"Post"> | Date | string
     comments?: CommentListRelationFilter
@@ -5961,6 +5978,7 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     imageUrl?: SortOrderInput | SortOrder
+    imagePublicId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: PostCountOrderByAggregateInput
@@ -5977,6 +5995,7 @@ export namespace Prisma {
     title?: StringWithAggregatesFilter<"Post"> | string
     description?: StringWithAggregatesFilter<"Post"> | string
     imageUrl?: StringNullableWithAggregatesFilter<"Post"> | string | null
+    imagePublicId?: StringNullableWithAggregatesFilter<"Post"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Post"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Post"> | Date | string
   }
@@ -6179,6 +6198,7 @@ export namespace Prisma {
     title: string
     description: string
     imageUrl?: string | null
+    imagePublicId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     comments?: CommentCreateNestedManyWithoutPostInput
@@ -6191,6 +6211,7 @@ export namespace Prisma {
     title: string
     description: string
     imageUrl?: string | null
+    imagePublicId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     comments?: CommentUncheckedCreateNestedManyWithoutPostInput
@@ -6201,6 +6222,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    imagePublicId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     comments?: CommentUpdateManyWithoutPostNestedInput
@@ -6213,6 +6235,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    imagePublicId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
@@ -6224,6 +6247,7 @@ export namespace Prisma {
     title: string
     description: string
     imageUrl?: string | null
+    imagePublicId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -6233,6 +6257,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    imagePublicId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -6243,6 +6268,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    imagePublicId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -6478,6 +6504,7 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     imageUrl?: SortOrder
+    imagePublicId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -6488,6 +6515,7 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     imageUrl?: SortOrder
+    imagePublicId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -6498,6 +6526,7 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     imageUrl?: SortOrder
+    imagePublicId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -6926,6 +6955,7 @@ export namespace Prisma {
     title: string
     description: string
     imageUrl?: string | null
+    imagePublicId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     comments?: CommentCreateNestedManyWithoutPostInput
@@ -6936,6 +6966,7 @@ export namespace Prisma {
     title: string
     description: string
     imageUrl?: string | null
+    imagePublicId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     comments?: CommentUncheckedCreateNestedManyWithoutPostInput
@@ -7029,6 +7060,7 @@ export namespace Prisma {
     title?: StringFilter<"Post"> | string
     description?: StringFilter<"Post"> | string
     imageUrl?: StringNullableFilter<"Post"> | string | null
+    imagePublicId?: StringNullableFilter<"Post"> | string | null
     createdAt?: DateTimeFilter<"Post"> | Date | string
     updatedAt?: DateTimeFilter<"Post"> | Date | string
   }
@@ -7228,6 +7260,7 @@ export namespace Prisma {
     title: string
     description: string
     imageUrl?: string | null
+    imagePublicId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutPostsInput
@@ -7239,6 +7272,7 @@ export namespace Prisma {
     title: string
     description: string
     imageUrl?: string | null
+    imagePublicId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -7291,6 +7325,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    imagePublicId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutPostsNestedInput
@@ -7302,6 +7337,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    imagePublicId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7351,6 +7387,7 @@ export namespace Prisma {
     title: string
     description: string
     imageUrl?: string | null
+    imagePublicId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -7389,6 +7426,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    imagePublicId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     comments?: CommentUpdateManyWithoutPostNestedInput
@@ -7399,6 +7437,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    imagePublicId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
@@ -7409,6 +7448,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    imagePublicId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
