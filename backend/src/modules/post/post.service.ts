@@ -2,7 +2,7 @@ import { AppError } from "../../utils/app-error.js";
 import { uploadToCloudinary } from "../../utils/cloudinary.helper.js";
 import { IPostRepository } from "./post.interface.js";
 import { mapPostResponse } from "./post.mapper.js";
-import { CreatePostDTO } from "./post.schema.js";
+import { CreatePostDTO, GetPostsDTO, UpdatePostDTO } from "./post.schema.js";
 
 export class PostService {
   constructor(private repo: IPostRepository) {}
@@ -37,5 +37,27 @@ export class PostService {
     });
 
     return mapPostResponse(post);
+  }
+
+  async getPosts(userId: string, data: GetPostsDTO) {
+    const posts = await this.repo.getPosts(userId, data);
+
+    return posts.map(mapPostResponse);
+  }
+
+  async updatePost(userId: string, postId: string, data: UpdatePostDTO) {
+    if (!userId) {
+      throw new AppError("Invalid User", 401);
+    }
+
+    const post = await this.repo.getPostByUserIdAndPostId(userId, postId);
+
+    if (!post) {
+      throw new AppError("Post Not Found", 404);
+    }
+
+    const updatedPost = await this.repo.updatePost(postId, data);
+
+    return mapPostResponse(updatedPost);
   }
 }
