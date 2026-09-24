@@ -1,5 +1,5 @@
 import { AppError } from "../../utils/app-error.js";
-import { uploadToCloudinary } from "../../utils/cloudinary.helper.js";
+import { deleteFromCloudinary, uploadToCloudinary } from "../../utils/cloudinary.helper.js";
 import { IPostRepository } from "./post.interface.js";
 import { mapPostResponse } from "./post.mapper.js";
 import { CreatePostDTO, GetPostsDTO, UpdatePostDTO } from "./post.schema.js";
@@ -7,11 +7,7 @@ import { CreatePostDTO, GetPostsDTO, UpdatePostDTO } from "./post.schema.js";
 export class PostService {
   constructor(private repo: IPostRepository) {}
 
-  async createPost(
-    data: CreatePostDTO,
-    userId: string,
-    file?: Express.Multer.File,
-  ) {
+  async createPost( data: CreatePostDTO, userId: string, file?: Express.Multer.File ) {
     let imageUrl: string | undefined;
     let imagePublicId: string | undefined;
 
@@ -37,6 +33,24 @@ export class PostService {
     });
 
     return mapPostResponse(post);
+  }
+
+  async getAllPosts (data: GetPostsDTO){
+    const { page, limit } = data;
+
+    const { posts, total } = await this.repo.getAllPosts(page, limit)
+
+    const totalPages = Math.ceil(total/ limit);
+
+    return {
+      posts: posts.map(mapPostResponse),
+      pagination: {
+        page,
+        limit,
+        total,
+        totalPages
+      }
+    }
   }
 
   async getPosts(userId: string, data: GetPostsDTO) {
@@ -72,6 +86,11 @@ export class PostService {
       throw new AppError("Post Not Found", 404);
     }
 
+    if(post.imagePublicId){
+      await deleteFromCloudinary(post.imagePublicId);
+    }
+
     return this.repo.deletePost(postId)
   }
+
 }

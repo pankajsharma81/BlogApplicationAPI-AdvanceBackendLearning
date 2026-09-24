@@ -60,18 +60,35 @@ export const updatePostController = catchAsync(
   },
 );
 
-export const deletePostcontroller = catchAsync (
+export const deletePostcontroller = catchAsync(
   async (req: Request, res: Response) => {
     const userId = req.userId as string;
     const postId = req.params.postId as string;
 
-    const result = await postService.deletePost(userId,postId);
+    const result = await postService.deletePost(userId, postId);
 
     sendResponse({
       res,
       statusCode: 200,
       message: "Post deleted Successfully",
-      data: result
-    })
-  }
-)
+    });
+  },
+);
+
+export const getAllPostsController = catchAsync(
+  async (req: Request, res: Response) => {
+    const data: GetPostsDTO = {
+      page: Number(req.query.page) || 1,
+      limit: Number(req.query.limit) || 10,
+    };
+
+    const result = await postService.getAllPosts(data);
+
+    sendResponse({
+      res,
+      statusCode: 200,
+      message: "All Posts fetched Successfully",
+      data: result,
+    });
+  },
+);

@@ -5,7 +5,7 @@ export const mapPostResponse = (post: {
   userId: string;
   title: string;
   description: string;
-  imageUrl: string;
+  imageUrl: string | null;
   createdAt: Date;
   updatedAt: Date;
 }): PostResponse => {

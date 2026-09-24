@@ -60,12 +60,32 @@ export class PostRepository implements IPostRepository {
     })
     return post
   }
-
+  
   async deletePost(postId: string){
     return await prisma.post.delete({
       where: {
         id: postId
       }
     })
+  }
+
+  async getAllPosts(page: number, limit: number){
+    const skip = (page - 1) * limit;
+
+    const [posts, total] = await Promise.all([
+      prisma.post.findMany({
+        skip,
+        take: limit,
+        orderBy: {
+          createdAt: "desc"
+        }
+      }),
+
+      prisma.post.count()
+    ])
+    return {
+      posts,
+      total
+    }
   }
 }
