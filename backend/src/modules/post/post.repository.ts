@@ -60,4 +60,12 @@ export class PostRepository implements IPostRepository {
     })
     return post
   }
+
+  async deletePost(postId: string){
+    return await prisma.post.delete({
+      where: {
+        id: postId
+      }
+    })
+  }
 }

@@ -44,9 +44,34 @@ export const getPostsController = catchAsync(
   },
 );
 
-// export const updatePostController = catchAsync(
-//   async (req: Request, res: Response) {
-//     const userId = req.userId,
-    
-//   }
-// )
+export const updatePostController = catchAsync(
+  async (req: Request, res: Response) => {
+    const userId = req.userId as string;
+    const postId = req.params.postId as string;
+
+    const result = await postService.updatePost(userId, postId, req.body);
+
+    sendResponse({
+      res,
+      statusCode: 200,
+      message: "Post updated Successfully",
+      data: result,
+    });
+  },
+);
+
+export const deletePostcontroller = catchAsync (
+  async (req: Request, res: Response) => {
+    const userId = req.userId as string;
+    const postId = req.params.postId as string;
+
+    const result = await postService.deletePost(userId,postId);
+
+    sendResponse({
+      res,
+      statusCode: 200,
+      message: "Post deleted Successfully",
+      data: result
+    })
+  }
+)

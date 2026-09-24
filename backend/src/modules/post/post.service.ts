@@ -60,4 +60,18 @@ export class PostService {
 
     return mapPostResponse(updatedPost);
   }
+
+  async deletePost(userId: string, postId: string){
+    if (!userId){
+      throw new AppError("Invalid User", 401);
+    }
+
+    const post = await this.repo.getPostByUserIdAndPostId(userId,postId);
+
+    if(!post){
+      throw new AppError("Post Not Found", 404);
+    }
+
+    return this.repo.deletePost(postId)
+  }
 }

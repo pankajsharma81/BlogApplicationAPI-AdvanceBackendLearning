@@ -13,5 +13,6 @@ export interface IPostRepository {
 
   getPostByUserIdAndPostId(userId: string, postId: string): Promise<any>;
   updatePost(postId: string, data: UpdatePostDTO): Promise<any>;
-}
 
+  deletePost(postId: string): Promise<any>;
+}
