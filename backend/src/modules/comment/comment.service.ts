@@ -20,9 +20,24 @@ export class CommentService {
     if (!post) {
       throw new AppError("post not found", 404);
     }
-
+    
     const comment = await this.commentRepo.createComment(userId, data);
-
+    
     return mapCommentResponse(comment);
+  }
+  
+  async deleteComment (userId: string, commentId: string){
+
+    if(!userId){
+      throw new AppError("userId is not valid", 401);
+    }
+    
+    const comment = await this.commentRepo.getCommentByUserIdAndCommentId(userId, commentId)
+    
+    if(!comment){
+      throw new AppError("comment not found", 404);
+    }
+
+    return this.commentRepo.deleteComment(commentId)
   }
 }
