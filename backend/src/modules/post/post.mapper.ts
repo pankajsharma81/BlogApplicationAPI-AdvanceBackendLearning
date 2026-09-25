@@ -1,3 +1,5 @@
+import { mapCommentResponse } from "../comment/comment.mapper.js";
+import { CommentResponse } from "../comment/comment.response.js";
 import { PostResponse } from "./post.response.js";
 
 export const mapPostResponse = (post: {
@@ -8,6 +10,7 @@ export const mapPostResponse = (post: {
   imageUrl: string | null;
   createdAt: Date;
   updatedAt: Date;
+  comments: CommentResponse[];
 }): PostResponse => {
   return {
     id: post.id,
@@ -17,5 +20,6 @@ export const mapPostResponse = (post: {
     imageUrl: post.imageUrl,
     createdAt: post.createdAt,
     updatedAt: post.updatedAt,
+    comments: post.comments?.map(mapCommentResponse) ?? [],
   };
 };

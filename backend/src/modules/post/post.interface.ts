@@ -24,4 +24,6 @@ export interface IPostRepository {
   updatePost(postId: string, data: UpdatePostDTO): Promise<any>;
 
   deletePost(postId: string): Promise<any>;
+
+  getPostByPostId(postId: string): Promise<any>;
 }

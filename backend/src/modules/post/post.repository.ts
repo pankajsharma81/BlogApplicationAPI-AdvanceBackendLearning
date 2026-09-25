@@ -28,6 +28,9 @@ export class PostRepository implements IPostRepository {
 
     const posts = await prisma.post.findMany({
       where: { userId },
+      include: {
+        comments: true,
+      },
       skip,
       take: limit,
       orderBy: {
@@ -55,21 +58,21 @@ export class PostRepository implements IPostRepository {
       },
       data: {
         title: data.title,
-        description: data.description
-      }
-    })
-    return post
-  }
-  
-  async deletePost(postId: string){
-    return await prisma.post.delete({
-      where: {
-        id: postId
-      }
-    })
+        description: data.description,
+      },
+    });
+    return post;
   }
 
-  async getAllPosts(page: number, limit: number){
+  async deletePost(postId: string) {
+    return await prisma.post.delete({
+      where: {
+        id: postId,
+      },
+    });
+  }
+
+  async getAllPosts(page: number, limit: number) {
     const skip = (page - 1) * limit;
 
     const [posts, total] = await Promise.all([
@@ -77,15 +80,22 @@ export class PostRepository implements IPostRepository {
         skip,
         take: limit,
         orderBy: {
-          createdAt: "desc"
-        }
+          createdAt: "desc",
+        },
       }),
 
-      prisma.post.count()
-    ])
+      prisma.post.count(),
+    ]);
     return {
       posts,
-      total
-    }
+      total,
+    };
+  }
+
+  async getPostByPostId(postId: string) {
+    const post = await prisma.post.findUnique({
+      where: { id: postId },
+    });
+    return post;
   }
 }
