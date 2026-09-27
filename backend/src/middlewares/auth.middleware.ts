@@ -3,15 +3,11 @@ import { AppError } from "../utils/app-error.js";
 import { verifyAccessToken } from "../utils/jwt.helper.js";
 import { authService } from "../modules/auth/auth.container.js";
 
-export const authenticate = async (
-  req: Request,
-  _res: Response,
-  next: NextFunction,
-) => {
+export const authenticate = async ( req: Request, _res: Response, next: NextFunction ) => {
   try {
     const token =
-      req.cookies?.accessToken ||
-      req.header("Authorization")?.replace("Bearer ", "");
+    req.header("Authorization")?.replace("Bearer ", "") ||
+    req.cookies?.accessToken;
 
     if (!token) {
       throw new AppError("Unauthorized request", 401);
@@ -28,6 +24,9 @@ export const authenticate = async (
     req.userId = user.id;
     next();
   } catch (error) {
-    next(new AppError("Invalid Or Expired token", 401));
+    if(error instanceof AppError){
+      return next(error);
+    }
+    next(error);
   }
 };

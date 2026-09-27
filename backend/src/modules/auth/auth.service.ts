@@ -73,7 +73,7 @@ export class AuthService {
     await this.repo.createRefreshToken({
       tokenHash: hashedToken,
       userId: user.id,
-      expiresAt: new Date(Date.now() + 7 * 25 * 60 * 60 * 1000),
+      expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
     });
 
     return {
@@ -123,7 +123,7 @@ export class AuthService {
     await this.repo.createRefreshToken({
       tokenHash: hashedToken,
       userId: payload.userId,
-      expiresAt: new Date(Date.now() + 7 * 25 * 60 * 60 * 1000),
+      expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
     });
 
     return {

@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import crypto from "crypto";
-import { NODE_ENV } from "../config/config.js";
+import { env } from "../config/config.js";
 import { Response } from "express";
 
 export const hashPassword = async (password: string): Promise<string> => {
@@ -22,14 +22,14 @@ export const hashToken = (token: string): string => {
 export const setCookies = (res: Response, accessToken: string, refreshToken: string) => {
   res.cookie("accessToken", accessToken, {
     httpOnly: true,
-    secure: NODE_ENV === "production",
+    secure: env.NODE_ENV === "production",
     sameSite: "lax",
-    maxAge: 24 * 60 * 60 * 1000
+    maxAge: 7 * 24 * 60 * 60 * 1000
   });
 
   res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
-    secure: NODE_ENV === "production",
+    secure: env.NODE_ENV === "production",
     sameSite: "lax",
     maxAge: 24 * 60 * 60 * 1000
   });

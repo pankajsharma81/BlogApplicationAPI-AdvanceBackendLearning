@@ -40,8 +40,8 @@ export const deleteFromCloudinary = (imagePublicId: string): Promise<void> => {
                     reject(new Error("Cloudinary delete Failed"))
                     return;
                 }
+                resolve()
             }
         )
-        resolve()
     })
 }

@@ -1,11 +1,11 @@
 import express, { Request, Response } from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import { FRONTEND_URL } from "./config/config.js";
 import { globalErrorHandler } from "./middlewares/error.middleware.js";
 import authRouter from "./modules/auth/auth.route.js"
 import postRouter from "./modules/post/post.route.js"
 import commentRouter from "./modules/comment/comment.route.js"
+import { env } from "./config/config.js"
 
 export const app = express();
 
@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 app.use(cookieParser());
 app.use(cors({
-    origin: FRONTEND_URL,
+    origin: env.FRONTEND_URL,
 }));
 
 app.get("/health-check", (req: Request, res: Response) => {
