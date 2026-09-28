@@ -15,8 +15,12 @@ const envSchema = z.object({
     JWT_REFRESH_SECRET: z.string().min(32, "JWT_REFRESH_SECRET must be at least 32 characters"),
 
     JWT_ACCESS_EXPIRES_IN: z.string().min(1),
-    JWT_REFRESH_EXPIRES_IN: z.string().min(1)
+    JWT_REFRESH_EXPIRES_IN: z.string().min(1),
 
+    CLOUDINARY_CLOUD_NAME: z.string().min(1, "CLOUDINARY_CLOUD_NAME is required"),
+    CLOUDINARY_API_KEY: z.string().min(1, "CLOUDINARY_API_KEY is required"),
+    CLOUDINARY_API_SECRET: z.string().min(1, "CLOUDINARY_API_SECRET is required"),
+    
 })
 
 const parseEnv = envSchema.safeParse(process.env);
