@@ -1,3 +1,4 @@
+import { Post } from "../../../generated/prisma/index.js";
 import { GetPostsDTO, UpdatePostDTO } from "./post.schema.js";
 
 export interface IPostRepository {
@@ -7,23 +8,35 @@ export interface IPostRepository {
     description: string;
     imageUrl?: string;
     imagePublicId?: string;
-  }): Promise<any>;
+  }): Promise<Post>;
 
-  getPosts(userId: string, data: GetPostsDTO): Promise<any>;
-  getAllPosts(page: number, limit: number): Promise<{posts:{
-        title: string;
-        description: string;
+  getPosts(
+    userId: string,
+    data: GetPostsDTO,
+  ): Promise<
+    (Post & {
+      comments: {
         id: string;
-        imageUrl: string | null;
+        comment: string;
+        postId: string;
+        userId: string;
         createdAt: Date;
         updatedAt: Date;
-        userId: string;
-  }[], total:number}>;
+      }[];
+    })[]
+  >;
+  getAllPosts(
+    page: number,
+    limit: number,
+  ): Promise<{ posts: Post[]; total: number }>;
 
-  getPostByUserIdAndPostId(userId: string, postId: string): Promise<any>;
-  updatePost(postId: string, data: UpdatePostDTO): Promise<any>;
+  getPostByUserIdAndPostId(
+    userId: string,
+    postId: string,
+  ): Promise<Post | null>;
+  updatePost(postId: string, data: UpdatePostDTO): Promise<Post>;
 
-  deletePost(postId: string): Promise<any>;
+  deletePost(postId: string): Promise<Post>;
 
-  getPostByPostId(postId: string): Promise<any>;
+  getPostByPostId(postId: string): Promise<Post | null>;
 }

@@ -1,8 +1,8 @@
 import z from "zod";
 
 export const createPostSchema = z.object({
-  title: z.string().min(1, "title is required"),
-  description: z.string().min(1, "description is required"),
+  title: z.string().trim().min(1, "title is required"),
+  description: z.string().trim().min(1, "description is required"),
 });
 
 export const getPostsSchema = z.object({
@@ -11,8 +11,8 @@ export const getPostsSchema = z.object({
 });
 
 export const updatePostSchema = z.object({
-  title: z.string().min(1, "title is required").optional(),
-  description: z.string().min(1, "description is required").optional(),
+  title: z.string().trim().min(1, "title is required").optional(),
+  description: z.string().trim().min(1, "description is required").optional(),
 });
 
 export type CreatePostDTO = z.infer<typeof createPostSchema>;

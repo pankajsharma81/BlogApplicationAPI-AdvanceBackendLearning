@@ -10,7 +10,7 @@ export const mapPostResponse = (post: {
   imageUrl: string | null;
   createdAt: Date;
   updatedAt: Date;
-  comments: CommentResponse[];
+  comments?: CommentResponse[];
 }): PostResponse => {
   return {
     id: post.id,

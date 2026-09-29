@@ -8,6 +8,11 @@ export class PostService {
   constructor(private repo: IPostRepository) {}
 
   async createPost( data: CreatePostDTO, userId: string, file?: Express.Multer.File ) {
+
+    if (!userId) {
+      throw new AppError("Invalid User", 401);
+    }
+
     let imageUrl: string | undefined;
     let imagePublicId: string | undefined;
 
