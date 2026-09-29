@@ -4,14 +4,7 @@ import { IAuthRepository } from "./auth.interface.js";
 export class AuthRepository implements IAuthRepository {
   async findUserById(id: string) {
     const user = await prisma.user.findUnique({
-      where: { id },
-      select: {
-        id: true,
-        username: true,
-        email: true,
-        createdAt: true,
-        updatedAt: true,
-      },
+      where: { id }
     });
     return user;
   }

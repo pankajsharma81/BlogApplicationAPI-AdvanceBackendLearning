@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import { catchAsync } from "../../utils/catch-async.js";
 import { sendResponse } from "../../utils/sendResponse.js";
 import { LoginResponse, RegisterResponse } from "./auth.response.js";
-import { AppError } from "../../utils/app-error.js";
 import { authService } from "./auth.container.js";
 import { clearCookies, setCookies } from "../../utils/auth.helper.js";
 
@@ -38,8 +37,9 @@ export const loginUserController = catchAsync(
 
 export const refreshTokenController = catchAsync(
   async (req: Request, res: Response) => {
-    const result = await authService.refreshToken(req.body);
-
+    const refreshToken = req.cookies?.refreshToken || req.body.refreshToken;
+    const result = await authService.refreshToken({ refreshToken });
+  
     setCookies(res, result.accessToken, result.refreshToken);
 
     sendResponse({
@@ -66,7 +66,7 @@ export const getCurrentUserController = catchAsync(
 
 export const logoutController = catchAsync(
   async (req: Request, res: Response) => {
-    const { refreshToken } = req.body;
+    const refreshToken = req.cookies?.refreshToken || req.body.refreshToken;
 
     const result = await authService.logout(refreshToken);
 

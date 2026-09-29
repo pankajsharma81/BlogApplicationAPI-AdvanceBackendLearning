@@ -1,12 +1,14 @@
+import { RefreshToken, User } from "../../../generated/prisma/index.js";
+
 export interface IAuthRepository {
-  findUserById(id: string): Promise<any>;
-  findUserByUsername(username: string): Promise<any>;
-  findUserByEmail(email: string): Promise<any>;
-  createUser(username: string, email: string, password: string): Promise<any>;
-  createRefreshToken(data:{ userId: string, tokenHash: string, expiresAt: Date}): Promise<any>;
-  findRefreshToken(tokenHash: string): Promise<any>;
-  findRefreshTokenByUserId(userId: string): Promise<any>;
-  deleteRefreshTokenById(id: string): Promise<any>;
-  deleteRefreshTokenByToken(tokenHash: string): Promise<any>;
-  deleteAllRefreshTokenByUser(userId: string): Promise<any>;
+  findUserById(id: string): Promise<User | null>;
+  findUserByUsername(username: string): Promise<User | null>;
+  findUserByEmail(email: string): Promise<User | null>;
+  createUser(username: string, email: string, password: string): Promise<User>;
+  createRefreshToken(data:{ userId: string, tokenHash: string, expiresAt: Date}): Promise<RefreshToken>;
+  findRefreshToken(tokenHash: string): Promise<RefreshToken | null>;
+  findRefreshTokenByUserId(userId: string): Promise<RefreshToken[]>;
+  deleteRefreshTokenById(id: string): Promise<RefreshToken>;
+  deleteRefreshTokenByToken(tokenHash: string): Promise<RefreshToken>;
+  deleteAllRefreshTokenByUser(userId: string): Promise<{ count: number}>;
 }
